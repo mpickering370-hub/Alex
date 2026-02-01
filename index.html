@@ -65,7 +65,13 @@
 
 <audio id="bgMusic" loop><source src="music.mp3" type="audio/mpeg"></audio>
 
-<div class="page active" id="page1">
+<div class="page active" id="startPage">
+  <div class="photo-frame"><img src="start.jpeg"></div>
+  <h1 style="color: #ff5fa2; font-family: 'Dancing Script', cursive; font-size: 2.5rem;">For My Love...</h1>
+  <button class="nav-btn" style="font-size: 1.2rem; padding: 15px 40px;" onclick="startExperience()">Open Your Gift ❤️</button>
+</div>
+
+<div class="page" id="page1">
   <div style="color:#e63946; font-weight:600; margin-bottom:15px; font-size: 1.4rem;">Enter an important date my love ❤️</div>
   <input type="password" id="passcode" maxlength="8" disabled placeholder="MMDDYYYY" />
   <div class="keypad">
@@ -120,9 +126,7 @@
     <img src="slide6.jpeg" class="carousel-slide">
     <img src="slide7.jpeg" class="carousel-slide">
   </div>
-  
   <h1 style="font-size: 2.2rem; padding: 0 10px;">YAYAYAYAY You Make Me SO Happy Honey 💖</h1>
-  
   <div id="lastThingContainer" style="margin-top:25px;">
     <p id="waitMsg" style="color:white; font-style:italic; opacity:0.7;">Wait for it... ✨</p>
     <button id="finalBtn" class="nav-btn" style="display:none; margin-top:0;" onclick="showPage('page6')">One last thing... 💌</button>
@@ -136,9 +140,11 @@
     <div class="letter-paper" id="letterPaper">
       <div class="letter-content" id="letterText">
         My Dearest Alex,<br><br>
-        [YOUR ROMANTIC LETTER HERE]<br><br>
-        I love you more than words can say. Thank you for being mine.<br><br>
-        Forever Yours,<br> ❤️
+        I love you so much! Happy anniversary honey. I know this isn't how we'd like to spend our anniversary or especially our first valentines day but this is the first of so many. All of this will be worth it in the end, and there is no one I'd rather be doing the distance with. 
+        I'm so excited for my visit. It's going to be so amazing. I genuinely think about it every single day. You're the best thing to ever happen to me and I am so grateful to have you in my life. <br><br>
+        "The distance means nothing when someone means everything!"<br><br>
+        I love you Forever & Always,<br>
+        -Matthew  ❤️<br> 
       </div>
     </div>
     <div class="envelope-front"></div>
@@ -152,15 +158,21 @@
   let carouselActive = false;
 
   function createHearts() {
-    for (let i = 0; i < 25; i++) {
+    // Increased heart count for start page
+    for (let i = 0; i < 40; i++) {
       let heart = document.createElement("div");
       heart.className = "bg-heart"; heart.innerHTML = "❤️";
       heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDelay = Math.random() * 5 + "s";
+      heart.style.animationDelay = Math.random() * 8 + "s";
       document.body.appendChild(heart);
     }
   }
   createHearts();
+
+  function startExperience() {
+    bgMusic.play().catch(e => console.log("Audio play blocked"));
+    showPage('page1');
+  }
 
   let slideIndex = 0;
   function runCarousel() {
@@ -174,7 +186,6 @@
   }
 
   function handleInput(num) { 
-    if (bgMusic.paused) bgMusic.play().catch(()=>{}); 
     if (enteredCode.length < 8) { 
       enteredCode += num; 
       document.getElementById("passcode").value = enteredCode; 
@@ -194,7 +205,6 @@
     if(id === 'page5' && !carouselActive) {
         carouselActive = true;
         runCarousel();
-        // Hide the "wait" text and show the button after 5 seconds
         setTimeout(() => {
           document.getElementById("waitMsg").style.display = "none";
           document.getElementById("finalBtn").style.display = "inline-block";
@@ -263,4 +273,3 @@
 </script>
 </body>
 </html>
-
